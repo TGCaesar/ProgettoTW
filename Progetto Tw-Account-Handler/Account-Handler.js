@@ -6,7 +6,7 @@ const { MongoClient, ServerApiVersion, Db } = require('mongodb');
 const bodyParser = require('body-parser')
 
 //inserire qui l'uri di mongodb
-const uri = "mongodb+srv://alessandrodecesare:NotImportant@selfietest.33bqb.mongodb.net/?retryWrites=true&w=majority&appName=SelfieTest";
+const uri = "###";
 
 
 app.use(function (req, res, next) {
@@ -38,7 +38,8 @@ app.post('/signup', (req, res) => {
   async function run() {
     var data
     try {
-      const collection = client.db("UserData").collection("Users")
+      //inserire il database e collection desiderati
+      const collection = client.db("###").collection("###")
       await client.connect();
       await client.db("admin").command({ ping: 1 });
       let success = false;
@@ -75,7 +76,8 @@ app.post('/login', (req, res) => {
     async function run() {
       var data
       try {
-        const collection = client.db("UserData").collection("Users")
+        //inserire il database e la collection desiderati
+        const collection = client.db("###").collection("###")
         await client.connect();
         await client.db("admin").command({ ping: 1 });
         let success = false;
