@@ -1,0 +1,27 @@
+<head>
+    <script defer src="timer.js"></script>
+</head>
+<div>
+    <label for="cicli">numero cicli</label>
+    <input type="number" id="cicli"></input>
+</div>
+<div>
+    <label for="studio">durata studio</label>
+    <input type="number" id="studio"></input>
+</div>
+<div>
+    <label for="pausa">durata pausa</label>
+    <input type="number" id="pausa"></input>
+</div>
+<div id="timer">
+00:00
+</div>
+<div id="currentcycle">
+    click start
+</div>
+<button onclick="start()">start</button>
+<button onclick="stop()">stop</button>
+<button onclick="resume()">resume</button>
+<button onclick="skip()">skip</button>
+<button onclick="next()">next</button>
+<button onclick="end()">end</button>
