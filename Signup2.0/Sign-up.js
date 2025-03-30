@@ -32,6 +32,7 @@ function signin () {
                             //chiamata http al backend, data è true se l'account è stato creato, altrimenti è false
                             $.post('http://localhost:6060/signup', user,function(data){if(data){
                                 //nel caso il signup è avvenuto con successo
+                                sessionStorage.setItem("selfie-user",user.username)
                             } else {
                                 if (ErrorP.hasChildNodes()) {ErrorP.removeChild(ErrorP.firstChild)}
                                 ErrorP.appendChild(ErrorMsgs.ExistingAccount)
@@ -66,3 +67,19 @@ function signin () {
         ErrorP.appendChild(ErrorMsgs.NoUserName)
     }
 } 
+
+
+// Al momento salvo su session storage l'username con chiave "selfie-user", forse da cambiare dopo
+
+/*
+// codice di logout
+logout () {
+    if(sessionStorage.getItem("selfie-user")) {
+        sessionStorage.removeItem("selfie-user")
+    }
+    if (localStorage.getItem("selfie-user")) {
+        localStorage.removeItem("selfie-user")
+    }
+}
+
+*/
