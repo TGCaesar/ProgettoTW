@@ -2,6 +2,7 @@
 const Email = document.getElementById("input-email");
 const Password = document.getElementById("input-psw");
 const Button = document.getElementById("btn")
+const check = document.getElementById("input-check")
 let ErrorMsgs = {
     NoName : document.createTextNode ("Inserire nome utente"),
     NoPassword : document.createTextNode ("Inserire Password"),
@@ -28,6 +29,12 @@ function login () {
                     if(data.success) {
                         //caso in cui il login avviene con successo
                         console.log("login")
+                        if(check.value)
+                        {
+                            localStorage.setItem("selfie-user",user.username)
+                        } else {
+                            sessionStorage.setItem("selfie-user",user.username)
+                        }
                     } else {
                         //caso in cui esiste un account con l'username corrispondente ma la password è sbagliata
                         if (ErrorP.hasChildNodes()) {ErrorP.removeChild(ErrorP.firstChild)}
@@ -58,3 +65,20 @@ function login () {
         ErrorP.appendChild(ErrorMsgs.NoName)
     }
 } 
+
+
+// Al momento salva solo l'username su localStorage o sessionStorage sulla chiave "selfie-user", forse da cambiare
+
+
+/*
+// codice di logout
+logout () {
+    if(sessionStorage.getItem("selfie-user")) {
+        sessionStorage.removeItem("selfie-user")
+    }
+    if (localStorage.getItem("selfie-user")) {
+        localStorage.removeItem("selfie-user")
+    }
+}
+
+*/
