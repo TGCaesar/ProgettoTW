@@ -1,0 +1,17 @@
+slider che va da valore minimo a valore massimo, misura i minuti in intervalli di 5 (24-96?35-96?)
+al valore 175 (35) (t) devono essere 5 cilcli (c) 30 (6) minuti di studio (s) e 5 (1) minuti di pausa (p)
+
+algoritmo improvvisato per incrementare s+p: 
+"if(2(s-6)>=p){p++} else {s++}"
+
+idee per la funzione che converte il tempo (t) in valori c s p:
+1. lo slider parte da 35, faccimao t/(s+p), verifichiamo che sia minore di 8, se no incrementiamo s+p (vedi funzione) e ripetiamo, alla fine c sarà t/(s+p)
+difetti: tende a lasciare larghi buchi in margine, accettabile a parte quello?
+2. ripetiamo i controlli di t/(s+p), memorizzando solo il valore di s+p con il resto minore, ci fermiamo quando s+p arriva a 12 o al primo valore che da resto zero
+
+idee sull'interfaccia:
+slider per selezionare il tempo che offre uno schedule suggerito accanto a delle tendine (input di testo? da considerare) che permettono di impostare valori c s p a scelta
+pulsante start che porta ad un altra pagina? L'avvio del timer non può essere legato alla finestra aperta, deve poter mandare notifiche anche sul telefono (capire come mandare notifiche, penso ci sia un'API apposita? il cambio di pagina sarebbe bello farlo con jquery)
+la pagina con il timer deve avere pulsanti per interagire con il timer e con i cicli (pausa il timer, ricomincia il timer da zero, salta fase corrente, passare al ciclo successivo, etc.)
+chiedere una conferma per passare da studio a pausa e viceversa? le slide del prof lo implicano
+RICHIESTA animazione per studio e pausa, da fare con css, devo vedere come si fà
