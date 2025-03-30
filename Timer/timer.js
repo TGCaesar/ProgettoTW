@@ -1,4 +1,5 @@
 const clock = document.getElementById("timer")
+const dots = document.getElementById("Dots")
 var wait
 var starttime
 var waittime
@@ -12,12 +13,14 @@ var alternator = true
 var finished = true
 var started = false
 
+
 function start() {
     if (!started) {
         started = true
-        cycles = (document.getElementById("cicli").value) * 2
-        study = document.getElementById("studio").value
-        pause = document.getElementById("pausa").value
+        skipper = true
+        cycles = (document.getElementById("cicli").textContent) * 2
+        study = document.getElementById("studio").textContent
+        pause = document.getElementById("pausa").textContent
         next()
         resume()
     }
@@ -28,6 +31,7 @@ function stop() {
         offset = waittime
         clearInterval(interval)
         interval = null
+        dots.style.animationName = null
     }
 }
 
@@ -35,6 +39,11 @@ function resume() {
     if (!interval) {
         starttime = Date.now()
         interval = setInterval(tick, 100)
+        if (cycles%2) {
+            dots.style.animationName = "study-anim"
+        } else {
+            dots.style.animationName = "pause-anim"
+        }
     }
 }
 
@@ -88,6 +97,7 @@ function tick() {
         interval = null
         skipper = true
         finished = true
+        dots.style.animationName = null
     }
 }
 
@@ -124,11 +134,13 @@ function next() {
 
 function end() {
     if (started) {
-        skip()
         cycles = 0
         study = 0
         pause = 0
+        wait = null
         finished = true
         started = false
+        document.getElementById("currentcycle").innerHTML = "Press start"
+        skip()
     }
 }
