@@ -1,0 +1,85 @@
+#btn {
+    background-color: #be3732;
+    margin: 10px;
+}
+#submit {
+    background-color: #be3732;
+    margin: 10px;
+}
+
+#Header {
+  background-color: white;
+  border-bottom: solid 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 2px 2px black;
+}
+
+#button-header {
+  background-color: #be3732;
+  color: white;
+  border: solid;
+  border-color: black;
+  width: max-content;
+}
+
+#button-header:hover {
+  background-color: lightcoral;
+}
+
+a{
+  color: black !important;
+}
+
+
+
+#button-event,
+#make-new-list,
+#make-new{
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  width: max-content;
+}
+
+
+
+#button-remove, 
+#button-modify{
+  border: none;
+  background-color: lightgray;
+}
+
+#button-modify:hover{
+  background-color: gray;
+  border-radius: 20%;
+}
+
+#button-remove:hover{
+  background-color: #be3732;
+  border-radius: 20%;
+}
+
+#time-set{
+  background-color: lightgray;
+  border: 0.5px solid black;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+#event-container{
+  margin: 5px;
+  border: 0.5px solid black;
+  border-radius: 5px;
+}
+
+#button-event-int-pencil{
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+#button-event-int-pencil:hover{
+  background-color: green;
+  color: white;
+}

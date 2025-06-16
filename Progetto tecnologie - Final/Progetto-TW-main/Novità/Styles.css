@@ -1,0 +1,29 @@
+#Header {
+  font-weight: 900;
+  font-size: larger;
+  background-color: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  box-shadow: 2px 2px;
+  margin: 10px;
+  padding: 5px;
+}
+#button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+}
+
+#button-header {
+  background-color: #be3732;
+  color: white;
+  border: solid;
+  border-color: black;
+}
+
+#button-header:hover {
+  background-color: lightcoral;
+}

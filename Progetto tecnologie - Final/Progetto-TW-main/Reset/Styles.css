@@ -1,0 +1,14 @@
+#Screen {
+    height: 100vh;
+}
+
+#Form {
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#btn {
+    background-color: #be3732;
+    margin: 10px;
+}
