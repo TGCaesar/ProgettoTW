@@ -1,0 +1,92 @@
+#Header {
+  font-weight: 900;
+  font-size: larger;
+  background-color: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  box-shadow: 2px 2px;
+  margin: 10px;
+  padding: 5px;
+}
+
+#button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+}
+
+#button-header {
+  background-color: #be3732;
+  color: white;
+  border: solid;
+  border-color: black;
+}
+
+#button-header:hover {
+  background-color: lightcoral;
+}
+
+#Accesso {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 700px;
+}
+
+#Bold_accesso {
+  font-size: 60px;
+  font-weight: 900;
+  margin: 20px;
+  text-align: center;
+}
+
+#button-accesso {
+  background-color: #be3732;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 28px;
+  margin: 10px;
+  color: white;
+}
+
+#button-accesso:hover {
+  background-color: lightcoral;
+}
+
+#Descrizioni {
+  margin-bottom: 20px;
+}
+
+#Promo {
+  background-color: #be3732;
+  color: white;
+  border: solid;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 5px;
+  box-shadow: 2px 2px black;
+  margin: 20px;
+  padding: 5px;
+}
+
+#bold_promo {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+#button-promo {
+  border: 2px solid #e5e7eb;
+  border-radius: 5px;
+  font-size: 25px;
+  background-color: #be3732;
+  color: white;
+  width: max-content;
+  margin: 10px;
+}
+
+#button-promo:hover {
+  background-color: lightcoral;
+}

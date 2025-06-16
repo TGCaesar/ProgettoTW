@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>UniBo Smile</title>
+    <link rel="stylesheet" href="Styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script> window.addEventListener("load", () => {
+      if (localStorage.getItem("selife-user") || sessionStorage.getItem("selfie-user")) {
+      // link alla pagina calendario
+      window.location.href("#")
+    }
+    })</script>
+  </head>
+
+  <body>
+    <nav class="navbar col-10 mx-auto" id="Header">
+      <ul class="navbar-nav col mx-auto">
+        <div class="row mx-auto">
+          <li class="nav-item col">
+            <a href="../Index.html" class="nav-link">HOME</a>
+          </li>
+          <li class="nav-item col d-none d-sm-block">
+            <a href="/Novità/Index.html" class="nav-link">NOVITÀ</a>
+          </li>
+          <li class="nav-item col d-none d-sm-block">
+            <a href="/Noi/Index.html" class="nav-link">NOI</a>
+          </li>
+          <li class="nav-item col">
+            <a href="" class="nav-link">INTRODUZIONE</a>
+          </li>
+        </div>
+      </ul>
+      <ul class="navbar-nav d-none d-xl-block col">
+        <div class="row">
+          <li class="col-9 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn"
+              id="button-header"
+              onclick="location.href='/Login/Index.html'"
+            >
+              Login
+            </button>
+          </li>
+          <li class="col-2 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn"
+              id="button-header"
+              onclick="location.href='/Signup/Index.html'"
+            >
+              Signup
+            </button>
+          </li>
+        </div>
+      </ul>
+    </nav>
+
+    <div id="accordion">
+      <div class="col-11 mx-auto">
+        <div class="row">
+          <div class="col">
+            <h1>Calendario</h1>
+          </div>
+        </div>
+        <div class="row">
+          <p>
+            Il Calendario è lo strumento fondamentale da realizzare con il progetto. Permette di creare, modificare e cancellare eventi, che a loro volta sono salvati online e possono essere condivisi tra più utenti
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a class="btn" data-bs-toggle="collapse" href="#collaps-eventi">
+            Calendario
+          </a>
+        </div>
+        <div id="collaps-eventi" class="collapse show" data-bs-parent="#accordion">
+          <div class="card-body">Lo sviluppo del codice HTML e JS del calendario è stato svolto principalmente da Valerio Bollina.</div>
+        </div>
+      </div>
+
+      <div class="col-11 mx-auto">
+        <div class="row">
+          <div class="col">
+            <h1>Appunti</h1>
+          </div>
+        </div>
+        <div class="row">
+          <p>
+            Gli appunti sono documenti salvati onlince che si possono accedere attraverso Selfie. Possono essere documenti di testo, che possono contere e mostrare corretamente i tag markup, oppure liste di consegne da spuntare, le quali ammettono scadenze che si aggiungono automaticamente al calendario come eventi.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a
+            class="collapsed btn"
+            data-bs-toggle="collapse"
+            href="#collapse-terzi"
+          >
+            Appunti
+          </a>
+        </div>
+        <div id="collapse-terzi" class="collapse" data-bs-parent="#accordion">
+          <div class="card-body">Lo sviluppo del codice HTML e CSS degli appunti è stato svolto principalmente da Alessandro De Cesare, con modifiche da parte di Valerio per l'integrazione delle scadenze e degli eventi</div>
+        </div>
+      </div>
+
+      <div class="col-11 mx-auto">
+        <div class="row">
+          <div class="col">
+            <h1>Pomodoro</h1>
+          </div>
+        </div>
+        <div class="row">
+          <p>
+            Sono state sviluppate due pagine per assistere lo studio secondo il metodo pomodoro. La prima di queste due pagine permtte di inserire le specifiche riguardo al tempo di studio e di pausa ed il numero di cicli alternanti dei due, oppure di dichiarare il tempo a disposizione per lo studio e genrare automaticamente delle specifiche appropriate. La seconda pagina consiste principalmente di un timer e di diversi pulsanti per mettere in pausa e far riprendere il timer e muoversi attraverso i cicli di studio e riposo.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a
+            class="collapsed btn"
+            data-bs-toggle="collapse"
+            href="#collapse-altro"
+          >
+            Pomodoro
+          </a>
+        </div>
+        <div id="collapse-altro" class="collapse" data-bs-parent="#accordion">
+          <div class="card-body">Lo sviluppo del codice HTML e CSS riguradanti il metodo di studio pomodoro è stato svolto principalmente da Alessandro De Cesare</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

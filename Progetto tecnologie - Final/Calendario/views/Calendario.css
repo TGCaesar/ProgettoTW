@@ -1,0 +1,229 @@
+#Header {
+  background-color: white;
+  border-bottom: solid 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 2px 2px black;
+}
+
+#button-header {
+  background-color: #be3732;
+  color: white;
+  border: solid;
+  border-color: black;
+  width: max-content;
+}
+
+#button-header:hover {
+  background-color: lightcoral;
+}
+
+a{
+  color: black !important;
+}
+
+
+#tenda {
+  border: solid 1px;
+  border-radius: 10px;
+  margin: 20px;
+  height: 100vh;
+}
+
+#drop {
+  margin-top: 20px;
+}
+
+
+#cal-mini {
+  font-size: 8px;
+  border: solid 1px lightgray;
+  border-radius: 10px;
+}
+
+#weekdays {
+  background-color: #be3732;
+  color: white;
+  font-weight: bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#days {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#button-cal {
+  border: none;
+  background-color: white;
+}
+
+#button-cal:hover {
+  background-color: lightgrey;
+  border-radius: 5px;
+}
+
+#button-cal:active {
+  background-color: gray;
+}
+
+#cal {
+  border: solid 2px lightgray;
+  padding-top: 0px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+#drop {
+  border: 1px solid black;
+}
+
+#button-event, 
+#button-note, 
+#button-close-note , 
+#button-event-int{
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  width: max-content;
+}
+
+#button-event:hover, 
+#button-event-int:hover {
+  background-color: gray;
+}
+
+#arrow {
+  background-color: white;
+  border: none;
+}
+
+#week {
+  height: 50vh;
+  border: solid 1px black;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#info {
+  border-left: solid 1px lightgray;
+}
+
+#blurry {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.5s ease;
+}
+
+.modal-container {
+  background-color: white;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  height: 90vh;
+  width: 90vh;
+  padding: 20px;
+}
+
+.modal-container-insert {
+  background-color: white;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  height: 80vh;
+  width: 80vh;
+  padding: 20px;
+}
+
+
+#button-close:hover, 
+#button-close-note:hover {
+  background-color: #be3732;
+  color: white;
+}
+
+
+#insert-note {
+  border: solid 0.5px black;
+  margin-bottom: 10px;
+}
+
+#button-close-note{
+  margin-right: 5px;
+}
+
+#events-cont {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightgray;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+#button-event-int{
+  margin-top: 10px;
+}
+
+#transition{
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+#a-tran:hover{
+  background-color: lightgray;
+}
+
+#button-remove, 
+#button-modify{
+  border: none;
+  background-color: lightgray;
+}
+
+#button-modify:hover{
+  background-color: gray;
+  border-radius: 20%;
+}
+
+#button-remove:hover{
+  background-color: #be3732;
+  border-radius: 20%;
+}
+
+#time-set{
+  background-color: lightgray;
+  border: 0.5px solid black;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+#event-container{
+  margin: 5px;
+  border: 0.5px solid black;
+  border-radius: 5px;
+}
+
+#button-event-int-pencil{
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+#button-event-int-pencil:hover{
+  background-color: green;
+  color: white;
+}
+
+#label-insert{
+  margin: 5px;
+}

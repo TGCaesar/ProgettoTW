@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>UniBo Smile</title>
+    <link rel="stylesheet" href="Styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script> window.addEventListener("load", () => {
+      if (localStorage.getItem("selife-user") || sessionStorage.getItem("selfie-user")) {
+      // link alla pagina calendario
+      window.location.href("#")
+    }
+    })</script>
+  </head>
+
+  <body>
+    <nav class="navbar fixed-top col-10 mx-auto" id="Header">
+      <ul class="navbar-nav col mx-auto">
+        <div class="row mx-auto">
+          <li class="nav-item col">
+            <a href="" class="nav-link">HOME</a>
+          </li>
+          <li class="nav-item col d-none d-sm-block">
+            <a href="/Novità/Index.html" class="nav-link">NOVITÀ</a>
+          </li>
+          <li class="nav-item col d-none d-sm-block">
+            <a href="/Noi/Index.html" class="nav-link">NOI</a>
+          </li>
+          <li class="nav-item col">
+            <a href="/Introduzione/Index.html" class="nav-link">INTRODUZIONE</a>
+          </li>
+        </div>
+      </ul>
+      <ul class="navbar-nav d-none d-xl-block col">
+        <div class="row">
+          <li class="col-9 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn"
+              id="button-header"
+              onclick="location.href='/Login/Index.html'"
+            >
+              Login
+            </button>
+          </li>
+          <li class="col-2 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn"
+              id="button-header"
+              onclick="location.href='/Signup/Index.html'"
+            >
+              Signup
+            </button>
+          </li>
+        </div>
+      </ul>
+    </nav>
+
+    <div class="col mx-auto" id="Accesso">
+      <div class="row">
+        <div class="col mx-auto d-flex justify-content-center">
+          <h1 id="Bold_accesso">Smile, perche' no?</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mx-auto d-flex justify-content-center">
+          <h2>Lorem ipsum dolor sit</h2>
+        </div>
+      </div>
+      <div class="row mx-auto">
+        <div class="col mx-auto">
+          <button
+            type="button"
+            class="btn"
+            id="button-accesso"
+            onclick="location.href='/Login/Index.html'"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            class="btn"
+            id="button-accesso"
+            onclick="location.href='/Signup/Index.html'"
+          >
+            Signup
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col d-flex justify-content-center">
+      <h1>Qualche informazione</h1>
+    </div>
+
+    <hr class="hr hr-blurry" />
+
+    <div class="col-11 mx-auto">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <h1>TITOLO</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 mx-auto justify-content-center">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+            fringilla condimentum posuere. Integer ornare odio felis, vitae
+            hendrerit eros placerat id. Donec sollicitudin in mi a ultricies.
+            Morbi dui eros, congue non interdum non, mattis ut ante. Nullam
+            porttitor in lectus eget consectetur. Maecenas quis arcu id odio
+            ullamcorper venenatis nec blandit nunc. Vivamus tincidunt ligula
+            diam, eu fringilla libero vehicula in. Etiam condimentum ante congue
+            nunc rutrum interdum.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <img src="" alt="Immagine feature" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="hr hr-blurry" />
+
+    <div class="col-11 mx-auto">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <h1>TITOLO</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 mx-auto justify-content-center">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+            fringilla condimentum posuere. Integer ornare odio felis, vitae
+            hendrerit eros placerat id. Donec sollicitudin in mi a ultricies.
+            Morbi dui eros, congue non interdum non, mattis ut ante. Nullam
+            porttitor in lectus eget consectetur. Maecenas quis arcu id odio
+            ullamcorper venenatis nec blandit nunc. Vivamus tincidunt ligula
+            diam, eu fringilla libero vehicula in. Etiam condimentum ante congue
+            nunc rutrum interdum.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <img src="" alt="Immagine feature" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="hr hr-blurry" />
+
+    <div class="col-11 mx-auto">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <h1>TITOLO</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 mx-auto justify-content-center">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+            fringilla condimentum posuere. Integer ornare odio felis, vitae
+            hendrerit eros placerat id. Donec sollicitudin in mi a ultricies.
+            Morbi dui eros, congue non interdum non, mattis ut ante. Nullam
+            porttitor in lectus eget consectetur. Maecenas quis arcu id odio
+            ullamcorper venenatis nec blandit nunc. Vivamus tincidunt ligula
+            diam, eu fringilla libero vehicula in. Etiam condimentum ante congue
+            nunc rutrum interdum.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <img src="" alt="Immagine feature" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="hr hr-blurry" />
+
+    <div class="col-10 col-md-8 mx-auto" id="Promo">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-11 col-xl-5">
+          <div id="bold_promo">Ti abbiamo convinto?</div>
+          <div class="">Muoviti ad iscriverti allora</div>
+        </div>
+        <div
+          class="col-sm-11 col-xl-5 d-flex align-items-center justify-content-end"
+        >
+          <div class="row d-none d-sm-block">
+            <button
+              class="col-6"
+              id="button-promo"
+              onclick="location.href='/Login/Index.html'"
+            >
+              Login
+            </button>
+            <button
+              class="col-6"
+              id="button-promo"
+              onclick="location.href='/Signup/Index.html'"
+            >
+              Signup
+            </button>
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="./Styles.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="Notes.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script> window.addEventListener("load", () => {
+      sessionStorage.setItem("selfie-user", "123")
+      load()
+    })
+  </script>
+</head>
+
+<body>
+  <nav class="navbar col mx-auto" id="Header">
+    <ul class="navbar-nav col mx-auto">
+      <div class="row mx-auto">
+        <li class="nav-item col">
+          <a href="" class="nav-link">Calendario</a>
+        </li>
+        <li class="nav-item col d-none d-sm-block">
+          <a href="" class="nav-link">Pomodoro</a>
+        </li>
+        <li class="nav-item col">
+          <a href="../../Introduzione/Index.html" class="nav-link d-none d-sm-block" target="_blank">Help</a>
+        </li>
+        <li class="nav-item col">
+          <div class="col">
+            <button class="btn col mx-auto" id="make-new" @click="showInsert=true">
+              Crea nuovo documento <img src="./Assets/journal-lines.png" alt="+" />
+            </button>
+          </div>
+        </li>
+        <li class="nav-item col">
+          <div class="col d-flex justify-content-center">
+            <div class="col d-none d-md-block">
+              <button class="btn col mx-auto" id="make-new-list" @click="showInsertAct=true">
+                Crea nuova lista <img src="./Assets/journal-dots.png" alt="+" />
+              </button>
+
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+    <ul class="navbar-nav">
+      <div class="row">
+        <li class="col d-flex justify-content-end">
+          <button type="button" class="btn" id="button-header" onclick="
+          if(sessionStorage.getItem('selfie-user')) {
+            sessionStorage.removeItem('selfie-user')
+          }
+          if (localStorage.getItem('selfie-user')) {
+            localStorage.removeItem('selfie-user')
+          }
+          // link alla homepage
+          window.location.href('#')
+              ">
+            Logout
+          </button>
+        </li>
+        </li>
+        <div class="col-1"></div>
+      </div>
+    </ul>
+  </nav>
+
+  <div class="row align-items-center">
+    <div class="col-2 text-center">
+      Ordina per:
+    </div>
+    <div class="col-9">
+      <select class="form-select" id="load-sort">
+        <option value="create_date">Data di Ceazione</option>
+        <option value="last_change">Data di Modifica</option>
+        <option value="title">Ordine alfabetico del titolo</option>
+        <option value="length">Lunghezza del corpo</option>
+      </select>
+    </div>
+    <div class="col-1">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="order">
+      </div>
+    </div>
+  </div>
+  <div class="row align-items-end">
+    <div class="col-10">
+      <label for="label-search">Cerca etichette:</label>
+      <input class="form-control" id="label-search">
+    </div>
+    <div class="col-2">
+      <button class="btn" type="button" id="search">Cerca</button>
+    </div>
+  </div>
+  <div class="row" id="docList" style="margin: 10px;">
+  </div>
+
+  <div class="card position-fixed top-50 start-50 translate-middle bg-black opacity-75" id="BlackBox"
+    style="height: 101%; width: 101%;" hidden>
+  </div>
+  <div class="card position-fixed top-50 start-50 translate-middle overflow-y-scroll overflow-x-hidden"
+    style="height: 90%; width: 90%;" id="doc-display" hidden>
+    <div class="row" style="background-color: #be3732;">
+      <div class="col-1">
+        <button class="btn" type="button" id="marker">Markdown</button>
+      </div>
+      <div class="col-10"></div>
+      <div class="col-1">
+        <button class="btn" type="button" id="x">X</button>
+      </div>
+    </div>
+    <input class="form-control" id="title" placeholder="Title"></input>
+    <div id="titleDiv"></div>
+    <div id="creatorDiv"></div>
+    <div class="row">
+      <div class="col-4">
+        <select class="form-select" id="permission-select">
+          <option value="public">Pubblica</option>
+          <option value="whitelist">Whitelist</option>
+          <option value="private">Privata</option>
+        </select>
+        <div class="card" id="permDiv" hidden>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="row align-items-end">
+      <div class="col-8">
+        <div>
+          <label for="WL-select">White List</label>
+          <select class="form-select" id="WL-select">
+          </select>
+
+        </div>
+
+      </div>
+      <div class="col-4 ">
+        <button class="btn" type="button" id="WL-remove">Rimuovi da White List</label></button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div>
+          <input class="form-control" id="WL-input" placeholder="Utente"></input>
+        </div>
+
+      </div>
+      <div class="col-4 ">
+        <button class="btn" type="button" id="WL-add">Aggiungi a White List</label></button>
+      </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-6">
+            <button type="button" class="btn" id="copy">Copia</button>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn" id="paste">Incolla</button>
+        </div>
+    </div> -->
+    <textarea class="form-control" id="body" placeholder="Corpo"></textarea>
+    <div class="card" id="markedBody"></div>
+    <div class="form-check overflow-y-scroll overflow-x-hidden" id="list-container" style="max-height: 50%;">
+      <div id="list-space">
+
+      </div>
+    </div>
+    <div class="row align-items-center" id="list-buttons">
+      <div class="col-7">
+        <input class="form-control" id="list-input" placeholder="Task">
+      </div>
+      <div class="col-5">
+        <button type="button" class="btn" id="list-add">Aggiungi nuovo elemento</button>
+      </div>
+    </div>
+
+
+    <div class="row align-items-end">
+      <div class="col-8">
+        <div>
+          <label for="label-select">Etichette</label>
+          <select class="form-select" id="label-select">
+          </select>
+
+        </div>
+
+      </div>
+      <div class="col-4 ">
+        <button class="btn" type="button" id="label-remove">Rimuovi etichetta</label></button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div>
+          <input class="form-control" id="label-input" placeholder="Etichetta"></input>
+        </div>
+
+      </div>
+      <div class="col-4 ">
+        <button class="btn" type="button" id="label-add">Aggiungi etichetta</label></button>
+      </div>
+    </div>
+
+    <div class="row">
+      <button type="button" class="btn" id="new">Crea documento</button>
+    </div>
+    <div class="row">
+      <button type="button" class="btn" id="copyDoc">Copia documento</button>
+      <button type="button" class="btn" id="update">Salva modifiche</button>
+    </div>
+    <div class="row">
+      <button type="button" class="btn" id="remove">Elimina documento</button>
+    </div>
+  </div>
+</body>
