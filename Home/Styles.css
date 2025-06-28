@@ -1,0 +1,59 @@
+
+#Header {
+  background-color: white;
+  border-bottom: solid 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 2px 2px black;
+}
+
+#button-header {
+  background-color: #be3732;
+  color: white;
+  border: solid;
+  border-color: black;
+  width: max-content;
+}
+
+#button-header:hover {
+  background-color: lightcoral;
+}
+
+a{
+  color: black !important;
+}
+
+
+
+ .EventTitle{
+ font: bold;
+ font-weight: bolder;
+ font-size: larger;
+ border-bottom: 1px solid black;
+ background-color: #be3732;
+ text-align: center;
+ border-radius: inherit;
+}
+.EventPlace{
+font-weight: bold;
+ border-bottom: 1px dotted black;
+ text-align: end;
+}
+.EventDesc{
+font-size: medium;
+text-align: justify;
+}
+.EventTime{
+    font: italic;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.ActDesc {
+    font-size: medium;
+}
+.ActTime {
+    font:bold;
+    font-weight: bold;
+    text-align: center;
+}
