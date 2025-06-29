@@ -43,7 +43,7 @@
 </style>
 
 <body>
-  <body>
+  <!-- La navbar che permette di navigare tra varie pagine -->
   <nav class="navbar col mx-auto" id="Header">
     <ul class="navbar-nav col mx-auto">
       <div class="row mx-auto">
@@ -134,6 +134,7 @@
   let pausa = document.getElementById('pauseDuration')
   let time = document.getElementById('finalTime')
 
+  // una semplice serie di funzioni che aggiorna la durata mostrata nell'interfaccia a seconda dei vari selettori
   function updateRange() {
     let val = parseInt(range.value)
     display.textContent = val * 5 + " minuti"
