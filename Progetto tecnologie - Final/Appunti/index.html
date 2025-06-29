@@ -8,14 +8,10 @@
   <script defer src="Notes.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script> window.addEventListener("load", () => {
-      sessionStorage.setItem("selfie-user", "123")
-      load()
-    })
-  </script>
 </head>
 
 <body>
+<!--Qui c'è la navbar che permette di navigare tra diverse pagine e di creare nuovi documenti -->
   <nav class="navbar col mx-auto" id="Header">
     <ul class="navbar-nav col mx-auto">
       <div class="row mx-auto">
@@ -68,7 +64,7 @@
       </div>
     </ul>
   </nav>
-
+<!-- Questa colonna contiene un form-select che permette di selezionare l'ordine in cui vengono disposti i documenti, oltre ad una switch per invertirlo -->
   <div class="row align-items-center">
     <div class="col-2 text-center">
       Ordina per:
@@ -87,6 +83,7 @@
       </div>
     </div>
   </div>
+  <!-- Il form label-search permette di ridurre la ricerca solo ad elementi etichettati con un certo tag -->
   <div class="row align-items-end">
     <div class="col-10">
       <label for="label-search">Cerca etichette:</label>
@@ -98,12 +95,13 @@
   </div>
   <div class="row" id="docList" style="margin: 10px;">
   </div>
-
+<!-- Qui vi è l'oggetto che mostra il documento aperto ed un oggetto nero parzialmente opaco che mette fuori fuoco il sottofondo quando si apre un documento -->
   <div class="card position-fixed top-50 start-50 translate-middle bg-black opacity-75" id="BlackBox"
     style="height: 101%; width: 101%;" hidden>
   </div>
   <div class="card position-fixed top-50 start-50 translate-middle overflow-y-scroll overflow-x-hidden"
     style="height: 90%; width: 90%;" id="doc-display" hidden>
+    <!-- All'interno del doc-display vengono nascosti o mostrati diversi elementi a seconda del documento aperto, se l'autore è l'utente, se si tratta di una lista o di un documento di testo etc., aggiungendo o rimiuvendo il tag hidden -->
     <div class="row" style="background-color: #be3732;">
       <div class="col-1">
         <button class="btn" type="button" id="marker">Markdown</button>
@@ -154,14 +152,7 @@
         <button class="btn" type="button" id="WL-add">Aggiungi a White List</label></button>
       </div>
     </div>
-    <!-- <div class="row">
-        <div class="col-6">
-            <button type="button" class="btn" id="copy">Copia</button>
-        </div>
-        <div class="col-6">
-            <button type="button" class="btn" id="paste">Incolla</button>
-        </div>
-    </div> -->
+    
     <textarea class="form-control" id="body" placeholder="Corpo"></textarea>
     <div class="card" id="markedBody"></div>
     <div class="form-check overflow-y-scroll overflow-x-hidden" id="list-container" style="max-height: 50%;">
