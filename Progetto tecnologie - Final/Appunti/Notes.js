@@ -13,6 +13,10 @@
 // list[i].done: valore booleano che indica se l'elemento all'index i è completato
 // list[i].expiry: un valore opzionale che contiene la data di scandenza dell'elemento i della lista
 
+const params = new URLSearchParams(window.location.search);
+let user = params.get("usr");
+
+
 const MarkedBody = document.getElementById("markedBody")
 MarkedBody.appendChild(document.createTextNode(null))
 const Marker = document.getElementById("marker")
@@ -63,12 +67,11 @@ const listArray = []
 
 
 function create() {
-    if (localStorage.getItem("selfie-user")) {
         let document = {
             type: doc_card.getAttribute("list"),
             title: title.value,
             body: body.value,
-            user: localStorage.getItem("selfie-user"),
+            user: user,
             labels: labels,
             list: listArray,
             permission: permission,
@@ -98,34 +101,7 @@ function create() {
             }
         }
         )
-    } else if (sessionStorage.getItem("selfie-user")) {
-        let document = {
-            type: doc_card.getAttribute("list"),
-            title: title.value,
-            body: body.value,
-            user: sessionStorage.getItem("selfie-user"),
-            labels: labels,
-            list: listArray,
-            permission: permission,
-            whitelist: whitelist
-        }
-
-        console.log(document)
-        $.post('http://localhost:5050/create', document, function (data) {
-            if (data) {
-                doc_card.setAttribute('id', data)
-                update.removeAttribute("hidden")
-                add.setAttribute("hidden", true)
-                Remove.removeAttribute("hidden")
-            } else {
-                //caso di errore
-                alert("errore di server")
-            }
-        }
-        )
-    } else {
-        console.log("utente non trovato")
-    }
+    
 
 }
 
@@ -159,12 +135,7 @@ function send() {
 }
 
 function load() {
-    var user
-    if (localStorage.getItem("selfie-user")) {
-        user = localStorage.getItem("selfie-user")
-    } else if (sessionStorage.getItem("selfie-user")) {
-        user = sessionStorage.getItem("selfie-user")
-    }
+    
     document.getElementById("docList").innerHTML = null
     var packet = {
         sender: user,
@@ -285,15 +256,6 @@ function open_doc(id) {
     }
     $.post('http://localhost:5050/singledoc', packet, function (data, status) {
         if (data) {
-            var selfieUser
-            if (localStorage.getItem("selfie-user")) {
-                selfieUser = localStorage.getItem("selfie-user")
-            } else if (sessionStorage.getItem("selfie-user")) {
-                selfieUser = sessionStorage.getItem("selfie-user")
-            } else {
-                console.log("user not found")
-                return null
-            }
             body.value = data.body
             title.value = data.title
             card_creator.textContent = data.creator
@@ -443,7 +405,7 @@ function open_doc(id) {
                     WLContainer.appendChild(option)
                 }
             }
-            if (selfieUser != data.creator) {
+            if (user != data.creator) {
                 if (data.type) {
                     Marker.setAttribute("hidden", true)
                     body.setAttribute("hidden", true)
@@ -567,14 +529,7 @@ function open_new_doc() {
     doc_card.setAttribute("list", false)
     body.value = null
     title.value = null
-    if (localStorage.getItem("selfie-user")) {
-                card_creator.textContent = localStorage.getItem("selfie-user")
-            } else if (sessionStorage.getItem("selfie-user")) {
-                card_creator.textContent =  sessionStorage.getItem("selfie-user")
-            } else {
-                console.log("user not found")
-                return null
-            }
+                card_creator.textContent = user
     
     MarkedBody.innerHTML = null
     labels.length = 0
@@ -793,13 +748,11 @@ document.getElementById("WL-remove").addEventListener("click", () => {
 
 
 function makeCopy() {
-
-    if (localStorage.getItem("selfie-user")) {
         let document = {
             type: doc_card.getAttribute("list"),
             title: title.value,
             body: body.value,
-            user: localStorage.getItem("selfie-user"),
+            user: user,
             labels: labels,
             list: listArray,
             permission: permission,
@@ -819,35 +772,6 @@ function makeCopy() {
             }
         }
         )
-    } else if (sessionStorage.getItem("selfie-user")) {
-        let document = {
-            type: doc_card.getAttribute("list"),
-            title: title.value,
-            body: body.value,
-            user: sessionStorage.getItem("selfie-user"),
-            labels: labels,
-            list: listArray,
-            permission: permission,
-            whitelist: whitelist
-        }
-
-        console.log(document)
-        $.post('http://localhost:5050/create', document, function (data) {
-            if (data) {
-                doc_card.setAttribute('id', data)
-                add.setAttribute("hidden", true)
-                update.removeAttribute("hidden")
-                copy.setAttribute("hidden",true)
-                card_creator.textContent = document.user
-            } else {
-                //caso di errore
-                alert("errore di server")
-            }
-        }
-        )
-    } else {
-        console.log("utente non trovato")
-    }
 }
 
 
@@ -971,14 +895,8 @@ function open_new_list() {
     doc_card.setAttribute("list", true)
     body.value = null
     title.value = null
-    if (localStorage.getItem("selfie-user")) {
-                card_creator.textContent = localStorage.getItem("selfie-user")
-            } else if (sessionStorage.getItem("selfie-user")) {
-                card_creator.textContent =  sessionStorage.getItem("selfie-user")
-            } else {
-                console.log("user not found")
-                return null
-            }
+                card_creator.textContent = user
+            
     MarkedBody.innerHTML = null
     labels.length = 0
     document.getElementById("label-input").value = null
