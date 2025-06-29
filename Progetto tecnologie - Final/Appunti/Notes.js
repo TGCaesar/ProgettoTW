@@ -13,6 +13,8 @@
 // list[i].done: valore booleano che indica se l'elemento all'index i è completato
 // list[i].expiry: un valore opzionale che contiene la data di scandenza dell'elemento i della lista
 
+
+// Qui definisco tutte le variabili globali e elementi dell HTML che verrano poi chiamate durante lo svolgimento delle varie funzioni
 const params = new URLSearchParams(window.location.search);
 let user = params.get("usr");
 
@@ -65,7 +67,9 @@ const listArray = []
 
 
 
-
+// La funzione Create legge i valori del documento aperto e poi crea una chiamata POST per salvare il documento nel server
+// La chiamata ritorna poi l'identificatore del documento creato e vengono nascosti i pulsanti appropriati per passare all'interfaccia di modifica del documento
+// Esistono un paio di condizionali if per prevenire la creazione di un documento vuoto che può causare errori
 function create() {
         let document = {
             type: doc_card.getAttribute("list"),
@@ -105,6 +109,8 @@ function create() {
 
 }
 
+// La funzione send è simile alla funzione Create, con la differenza che non c'è bisogno di includere nella richiesta l'autore del documento e il tipo del documento (lista o documento di testo), dato che questi valori non possono essere modificati
+// Inoltre la chiamata non ha bisogno di inviare nessun dato oltre alla conferma di successo, a differenza della richiesta create che deve ricevere l'identificatore generato dall'API MongoDB
 function send() {
     let doc = {
         body: document.getElementById("body").value,
@@ -134,6 +140,9 @@ function send() {
     })
 }
 
+// La funzione load è la funzione essenziale della pagina appunti, è la funzione che permette di visualizzare i documenti creati
+// Al suo fulcro la funzione crea un oggetto contente l'utente, la query della ricerca (che può essere anche nulla) e le specifica dell'ordine e genera una richiesta al server
+// La funzione per inserire gli oggetti ottenuti in risposta è scritta separatamente per rendermi più semplice lavorarci
 function load() {
     
     document.getElementById("docList").innerHTML = null
@@ -150,7 +159,6 @@ function load() {
     }
     options["sort"] = sort
     packet["options"] = options
-    console.log(packet)
     $.post('http://localhost:5050/load', packet, function (data, status) {
         if (data) {
             doc_display(data, "docList")
@@ -165,7 +173,8 @@ function load() {
 }
 
 
-
+// Questa è la funzione che si occupa di inserire gli elementi all'interno della pagina html, troncando il titolo a 40 caratteri e il corpo a 200, com richiesto dalle specifiche del progetto
+// Dato che la quantità di documenti mostrabile è variabile ho dovuto usare la funzione createElement per generare ogni documento, poi ho usato setAttribute per applicare le classi appropriate di Bootstrap e del mio codice css per creare una pagina reattiva e esteticamente appropriata
 function doc_display(data, location) {
     var cell
     var title
@@ -224,6 +233,8 @@ function doc_display(data, location) {
     }
 }
 
+// Le funzioni display_open e display_close semplicemente applicano o rimuovono l'attributo hidden da doc_card e BlackBox, rispettivamente il pannello che contiene l'interfaccia di modifica e visualizzazione dei documenti e un oggetto nero parzialmente opaco che mette fuori fuoco il resto della pagina
+// display_close inoltre annulla tutti i valori relativi al documento aperto, è un processo ridondante dato che vengono sovrascritti ogni volta che si apre un documento ma l'ho fatto per prevenire possibili errori che potrei non aver considerato 
 
 function display_open() {
     BlackBox.removeAttribute("hidden")
@@ -249,6 +260,9 @@ function display_close() {
     document.getElementById("list-input").value = null
 }
 
+// La funzione open_doc viene eseguita ogni volta che si clicca sulla card associata ad un documento ed apre su doc_card l'intero documento
+// La più grande complicazione riguardante questa funzione è il caricare le liste, dato che hanno lunghezza variabile e richiedono l'inclusione di pulsanti e calendario per ogni elemento e richiedono l'utilizzo di createElement e setAttribute per inserire questi nel DOM dell'html
+// Inoltre bisogna considerare se il documento è dell'utente della pagina oppure no, e disattivare o riattivare e mostrare o nascondere gli elementi dell'interfaccia a seconda del caso
 function open_doc(id) {
     console.log(id)
     packet = {
@@ -429,8 +443,6 @@ function open_doc(id) {
                     document.getElementById("label-add").setAttribute("hidden", true)
                     document.getElementById("WL-remove").setAttribute("hidden", true)
                     document.getElementById("WL-add").setAttribute("hidden", true)
-                    // document.getElementById("paste").setAttribute("hidden", true)
-                    // document.getElementById("copy").removeAttribute("hidden")
                     listContainer.removeAttribute("hidden")
                     document.getElementById("list-buttons").setAttribute("hidden",true)
                 } else {
@@ -456,8 +468,6 @@ function open_doc(id) {
                     document.getElementById("label-add").setAttribute("hidden", true)
                     document.getElementById("WL-remove").setAttribute("hidden", true)
                     document.getElementById("WL-add").setAttribute("hidden", true)
-                    // document.getElementById("paste").setAttribute("hidden", true)
-                    // document.getElementById("copy").removeAttribute("hidden")
                     listContainer.setAttribute("hidden", true)
                     document.getElementById("list-buttons").setAttribute("hidden",true)
                 }
@@ -484,8 +494,6 @@ function open_doc(id) {
                     document.getElementById("label-add").removeAttribute("hidden")
                     document.getElementById("WL-remove").removeAttribute("hidden")
                     document.getElementById("WL-add").removeAttribute("hidden")
-                    // document.getElementById("paste").removeAttribute("hidden")
-                    // document.getElementById("copy").removeAttribute("hidden", true)
                     listContainer.removeAttribute("hidden")
                     document.getElementById("list-buttons").removeAttribute("hidden")
                 } else {
@@ -509,8 +517,6 @@ function open_doc(id) {
                     document.getElementById("label-add").removeAttribute("hidden")
                     document.getElementById("WL-remove").removeAttribute("hidden")
                     document.getElementById("WL-add").removeAttribute("hidden")
-                    // document.getElementById("paste").removeAttribute("hidden")
-                    // document.getElementById("copy").removeAttribute("hidden")
                     listContainer.setAttribute("hidden", true)
                     document.getElementById("list-buttons").setAttribute("hidden",true)
                 }
@@ -524,7 +530,8 @@ function open_doc(id) {
 
 }
 
-
+// Simile alla funzione precedente, però open_new_doc non deve aprire un documento esistente, quindi non neccesita una chiamata al backend e non serve considerare l'autore del documento
+// Per semplicità ho differenziato open_new_doc e open_new_list dato che i documenti di testo e le liste sono incompatibili e quindi conviene avere pulsanti separati
 function open_new_doc() {
     doc_card.setAttribute("list", false)
     body.value = null
@@ -562,38 +569,66 @@ function open_new_doc() {
     document.getElementById("label-add").removeAttribute("hidden")
     document.getElementById("WL-remove").removeAttribute("hidden")
     document.getElementById("WL-add").removeAttribute("hidden")
-    // document.getElementById("paste").removeAttribute("hidden")
-    // document.getElementById("copy").removeAttribute("hidden")
     listContainer.setAttribute("hidden", true)
     document.getElementById("list-buttons").setAttribute("hidden", true)
     document.getElementById("list-buttons").setAttribute("hidden",true)
     display_open()
 }
 
+document.getElementById("make-new-list").addEventListener("click", open_new_list)
+function open_new_list() {
+    doc_card.setAttribute("list", true)
+    body.value = null
+    title.value = null
+                card_creator.textContent = user
+            
+    MarkedBody.innerHTML = null
+    labels.length = 0
+    document.getElementById("label-input").value = null
+    labelContainer.innerHTML = null
+    document.getElementById("WL-input").value = null
+    whitelist.length = 0
+    permSelection.value = "public"
+    WLContainer.innerHTML = null
+    listArray.length = 0
+    listContainer.innerHTML = null
+    document.getElementById("list-input").value = null
+    add.removeAttribute("hidden")
+    update.setAttribute("hidden", true)
+    Remove.setAttribute("hidden", true)
+    Marker.setAttribute("hidden", true)
+    copy.setAttribute("hidden", true)
+    body.setAttribute("hidden", true)
+    MarkedBody.innerHTML = null
+    MarkedBody.textContent = body.value
+    MarkedBody.innerHTML = marked.parse(MarkedBody.innerHTML)
+    MarkedBody.setAttribute("hidden", true)
+    TitleDiv.setAttribute("hidden", true)
+    title.removeAttribute("hidden")
+    document.getElementById("WL-input").removeAttribute("hidden")
+    document.getElementById("label-input").removeAttribute("hidden")
+    permSelection.removeAttribute("hidden")
+    permDiv.setAttribute("hidden", true)
+    document.getElementById("label-remove").removeAttribute("hidden")
+    document.getElementById("label-add").removeAttribute("hidden")
+    document.getElementById("WL-remove").removeAttribute("hidden")
+    document.getElementById("WL-add").removeAttribute("hidden")
+    listContainer.removeAttribute("hidden")
+    document.getElementById("list-buttons").removeAttribute("hidden")
+    display_open()
+}
 
+// Niente di notevole, semplicemente aggiorna il valore sorter che stabilisce l'ordine in cui load dispone le card dei documenti
 selction.addEventListener("change", select)
 
 function select() {
     sorter = selction.value
 }
 
-// document.getElementById("copy").addEventListener("click", async function () {
-//     try {
-//         navigator.clipboard.writetext(body.textContent)
-//     } catch {
-
-//     }
-// })
-
-// document.getElementById("paste").addEventListener("click", async function () {
-//     try {
-//         body.value = navigator.clipboard.readText()
-//     } catch {
-
-//     }
-// })
 
 
+// Remover è una semplice funzione che elimina un documento facendo una richiesta con l'identificatore del documento
+// Dopo chiude il documento e ricarica tutti i documenti aperti per rimuovere ogni elemento che potrebbe riportare al documento eliminato
 function Remover() {
     let packet = {
         id: doc_card.id
@@ -607,6 +642,7 @@ function Remover() {
     })
 }
 
+// Il pulsante Marker permette di passare dalla view markup a quella normale e vice versa
 Marker.addEventListener("click", () => {
     if (body.hidden) {
         body.removeAttribute("hidden")
@@ -620,7 +656,8 @@ Marker.addEventListener("click", () => {
     }
 })
 
-
+// label-add e label-remove sono due pulsanti che permettono di manipolare le etichette associate al documento aperto
+// In realtà il form-select che mostra le etichette non è direttamente associato alle etichette del documento, ma piuttosto le funzioni manipolano l'array labels, e si assicurano che coincida sempre con il form select
 document.getElementById("label-add").addEventListener("click", () => {
     let text = document.getElementById("label-input").value
     if (text) {
@@ -647,7 +684,7 @@ document.getElementById("label-remove").addEventListener("click", () => {
     }
 })
 
-
+// La ricerca per etichette in realtà è abbastanza semplice, il fulcro di loadLabel è uguale a load, l'unica differenza è che legge il valore del form label-search e lo imposta come query nella ricerca, il resto è gestito nel backend dall'API di MongoDB
 function loadLabel() {
     document.getElementById("docList").innerHTML = null
     if (document.getElementById("label-search").value) {
@@ -681,38 +718,6 @@ function loadLabel() {
 
 
 
-// function loadOwnDoc() {
-//     document.getElementById("docList").innerHTML = null
-//     var user
-//     if (localStorage.getItem("selfie-user")) {
-//         user = localStorage.getItem("selfie-user")
-//     } else if (sessionStorage.getItem("selfie-user")) {
-//         user = sessionStorage.getItem("selfie-user")
-//     }
-//     var packet = {
-//         sender: user,
-//         query: { creator: user }
-//     }
-//     var options = {}
-//     var sort = {}
-//     if (document.getElementById("order").checked) {
-//         sort[sorter] = -1
-//     } else {
-//         sort[sorter] = 1
-//     }
-//     options["sort"] = sort
-//     packet["options"] = options
-//     console.log(packet)
-//     $.post('http://localhost:5050/load', packet, function (data, status) {
-//         if (data) {
-//             doc_display(data, "docList")
-
-
-
-//         }
-//     })
-
-// }
 
 permSelection.addEventListener("change", permSelect)
 
@@ -721,7 +726,7 @@ function permSelect() {
 }
 
 
-
+// Il funzionamento della whitelist è in tutto e per tutto uguale a quello dei label per quanto riguarda il frontend
 document.getElementById("WL-add").addEventListener("click", () => {
     let text = document.getElementById("WL-input").value
     if (text) {
@@ -747,6 +752,7 @@ document.getElementById("WL-remove").addEventListener("click", () => {
 })
 
 
+// makeCopy è una funzione quasi uguale create, l'unica differenza è che quando viene eseguita è già aperto il documento di qualcun'altro, creando così un documento uguale in tutto tranne l'autore
 function makeCopy() {
         let document = {
             type: doc_card.getAttribute("list"),
@@ -775,6 +781,9 @@ function makeCopy() {
 }
 
 
+// Il pulsante list-add aggiunge un elemento ai documenti di tipo lista, prima verifica che non esista già un elemento uguale e poi aggiunge un elemento all'array listArray associato, come le etichette e la whitelist
+// La funzione poi deve aggiungere l'elemento anche nel corpo della doc_card, insieme ai pulsanti per manipolare l'elemento e il form calendario per mostrare la scadenza associata all'elemento
+// Manca un pulsante per modificare il testo di un'elemento della lista ma non l'ho considerato necessario, inoltre ho pensato che aggiungere un pulsante in più avrebbe reso l'interfaccia troppo affollata e difficile da usare
 document.getElementById("list-add").addEventListener("click", () => {
     let text = document.getElementById("list-input").value
     if (text) {
@@ -890,47 +899,3 @@ document.getElementById("list-add").addEventListener("click", () => {
     
 })
 
-document.getElementById("make-new-list").addEventListener("click", open_new_list)
-function open_new_list() {
-    doc_card.setAttribute("list", true)
-    body.value = null
-    title.value = null
-                card_creator.textContent = user
-            
-    MarkedBody.innerHTML = null
-    labels.length = 0
-    document.getElementById("label-input").value = null
-    labelContainer.innerHTML = null
-    document.getElementById("WL-input").value = null
-    whitelist.length = 0
-    permSelection.value = "public"
-    WLContainer.innerHTML = null
-    listArray.length = 0
-    listContainer.innerHTML = null
-    document.getElementById("list-input").value = null
-    add.removeAttribute("hidden")
-    update.setAttribute("hidden", true)
-    Remove.setAttribute("hidden", true)
-    Marker.setAttribute("hidden", true)
-    copy.setAttribute("hidden", true)
-    body.setAttribute("hidden", true)
-    MarkedBody.innerHTML = null
-    MarkedBody.textContent = body.value
-    MarkedBody.innerHTML = marked.parse(MarkedBody.innerHTML)
-    MarkedBody.setAttribute("hidden", true)
-    TitleDiv.setAttribute("hidden", true)
-    title.removeAttribute("hidden")
-    document.getElementById("WL-input").removeAttribute("hidden")
-    document.getElementById("label-input").removeAttribute("hidden")
-    permSelection.removeAttribute("hidden")
-    permDiv.setAttribute("hidden", true)
-    document.getElementById("label-remove").removeAttribute("hidden")
-    document.getElementById("label-add").removeAttribute("hidden")
-    document.getElementById("WL-remove").removeAttribute("hidden")
-    document.getElementById("WL-add").removeAttribute("hidden")
-    // document.getElementById("paste").setAttribute("hidden", true)
-    // document.getElementById("copy").setAttribute("hidden", true)
-    listContainer.removeAttribute("hidden")
-    document.getElementById("list-buttons").removeAttribute("hidden")
-    display_open()
-}
