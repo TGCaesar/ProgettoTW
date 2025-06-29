@@ -43,7 +43,46 @@
 </style>
 
 <body>
-  <div class="row">
+  <!-- La navbar che permette di navigare tra varie pagine -->
+  <nav class="navbar col mx-auto" id="Header">
+    <ul class="navbar-nav col mx-auto">
+      <div class="row mx-auto">
+        <li class="nav-item col">
+          <a href="" class="nav-link">Calendario</a>
+        </li>
+        <li class="nav-item col">
+        <a href="/Appunti/index.html" class="nav-link d-none d-sm-block">Appunti</a>
+      </li>
+        <li class="nav-item col">
+          <a href="../../Introduzione/Index.html" class="nav-link d-none d-sm-block" target="_blank">Help</a>
+        </li>
+      
+      </div>
+    </ul>
+    <ul class="navbar-nav">
+      <div class="row">
+        <li class="col d-flex justify-content-end">
+          <button type="button" class="btn" id="button-header" onclick="
+          if(sessionStorage.getItem('selfie-user')) {
+            sessionStorage.removeItem('selfie-user')
+          }
+          if (localStorage.getItem('selfie-user')) {
+            localStorage.removeItem('selfie-user')
+          }
+          // link alla homepage
+          window.location.href('#')
+              ">
+            Logout
+          </button>
+        </li>
+        </li>
+        <div class="col-1"></div>
+      </div>
+    </ul>
+  </nav>
+
+
+  <div class="row" style="margin: 20px;">
     <div class="col-1">
       <label for="timeRange" class="form-label"> Durata</label>
     </div>
@@ -54,21 +93,19 @@
     </div>
     <input type="range" class="form-range" min="35" max="96" id="timeRange">
 
-    <button type="button" class="btn" id="submit" onclick="test()">Submit</button>
+    <button type="button" class="btn" id="submit" onclick="Count()">Seleziona</button>
     <div class="row">
-      <div class="col-2">
 
-      </div>
-      <div class="col-2">
+      <div class="col-3">
         <label for="cycles" class="form-label">Numero cicli</label>
         <input type="number" class="form-control" id="cycles">
       </div>
-      <div class="col-2">
+      <div class="col-3">
         <label for="studyDuration" class="form-label">Durata studio</label>
         <input type="number" class="form-control" id="studyDuration">
       </div>
 
-      <div class="col-2">
+      <div class="col-3">
         <label for="pauseDuration" class="form-label">Durata pausa</label>
         <input type="number" class="form-control" id="pauseDuration">
       </div>
@@ -80,14 +117,10 @@
     </div>
 
     <div class="row">
-      <div class="col-2">
-        <!-- inserire link per tornare nella pagina precedente -->
-        <a class="btn" href="#" id="btn" role="button">Back</a>
-      </div>
-      <div class="col-8">
+      <div class="col-10">
 
       </div>
-      <div align="right" class="col-2"> <button type="button-primary" id="btn" class="btn justify-end" onclick="next()">Next</button>
+      <div align="right" class="col-2"> <button type="button-primary" id="btn" class="btn justify-end" onclick="next()">Avanti</button>
       </div>
     </div>
 </body>
@@ -101,6 +134,7 @@
   let pausa = document.getElementById('pauseDuration')
   let time = document.getElementById('finalTime')
 
+  // una semplice serie di funzioni che aggiorna la durata mostrata nell'interfaccia a seconda dei vari selettori
   function updateRange() {
     let val = parseInt(range.value)
     display.textContent = val * 5 + " minuti"
