@@ -41,6 +41,7 @@
     00:00
 </div>
 </div>
+<!-- L'animazione dell'icona della matita cambia a seconda del ciclo corrente, nei cicli di studio si muove avanti e indietro a zig-zag, nei cicli di pausa gira su se stessa -->
 <div class="col-2">
 <img src="pencil.svg" style="width: 15px;" id="Dots">
 </div>
@@ -48,24 +49,20 @@
 <div id="currentcycle">
     Press start
 </div>
+<!-- I vari pulsanti vengono mostrati o nascoscti dinamicamente quando sono attivi, aggiungendo o rimuovendo il tag hidden -->
 <div class="row" align="center">
-    <div class="col-2">
-        <button type="button" class="btn operation-button" id="btn" onclick="start()">Inizia</button>
-    </div>
-    <div class="col-2">
-        <button type="button" class="btn operation-button" id="btn" onclick="stop()">Pausa</button>
-    </div>
-    <div class="col-2">
-        <button type="button" class="btn operation-button" id="btn" onclick="resume()">Riprendi</button>
-    </div>
-    <div class="col-2">
-        <button type="button" class="btn operation-button" id="btn" onclick="skip()">Salta</button>
-    </div>
-    <div class="col-2">
-        <button type="button" class="btn operation-button" id="btn" onclick="next()">Successivo</button>
-    </div>
-    <div class="col-2">
-        <button type="button" class="btn operation-button" id="btn" onclick="end()">Fine</button>
+    <div class="col">
+        <button type="button" class="btn operation-button" id="start" >Inizia</button>
+    
+        <button type="button" class="btn operation-button" id="stop" hidden>Pausa</button>
+        <button type="button" class="btn operation-button" id="resume" hidden>Riprendi</button>
+    
+        <button type="button" class="btn operation-button" id="skip" hidden>Salta</button>
+    
+        <button type="button" class="btn operation-button" id="next" hidden>Successivo</button>
+    
+        <button type="button" class="btn operation-button" id="end" hidden>Fine</button>
+        <button type="button" class="btn operation-button" id="restart" hidden>Riavvia ciclo</button>
     </div>
 </div>
 <div class="row">
