@@ -9,6 +9,7 @@ const pause = 'pauseDuration'
 var s
 var p
 
+// Una semplice funzione che aggiorna il contatore nella pagina
 function Count () {
     let c = document.getElementById(cycles)
     let s = document.getElementById(study)
@@ -27,7 +28,8 @@ function incrementer () {
     if (s-6>=2*(p-1)) {p++} else {s++}
 }
 
-//funzione che riceve in input il tempo totale e ritorna un ogetto contenente la lunghezza del tempo di studio, di pausa e il numero di cicli
+// funzione che riceve in input il tempo totale e ritorna un ogetto contenente la lunghezza del tempo di studio, di pausa e il numero di cicli
+// il calcolo aritmetico preferisce un numero maggiore di cicli rispetto ad un aumento della durata dei cicli, ma piu di tutto preferisce che il tempo totale si esattamente uguale tempo selezionato
 function number_parser (int) {
     console.log(int)
     s = 6;
@@ -63,8 +65,3 @@ function number_parser (int) {
     }
     return (response)
 }
-
-// button.addEventListener('click', function () {
-// let res = number_parser(range.value)
-// console.log(res)
-// })
