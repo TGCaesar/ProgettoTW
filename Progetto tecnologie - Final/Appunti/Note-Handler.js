@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-
+// Un semplice gestore della richiesta create, aggiunge nella raccolta un documento con i dati specificati nella richiesta post enventualmente creando un evento in caso il documento sia una lista in cui uno o più elementi hanno una scadenza
 app.post('/create', (req, res) => {
   console.log("create");
   const client = new MongoClient(uri, {
@@ -79,7 +79,8 @@ app.post('/create', (req, res) => {
 })
 
 
-
+// Strutturalmente simile al gestore della richiesta create, la principale differenza è che invece di creare un documento nuovo sovrascrive i valori di un documento con quelly specificati dalla request
+// Se il documento è una lista verifica che non ci siano eventi da aggiornare, altrimenti li aggiorna
 app.post('/update', (req, res) => {
   console.log('update')
   const client = new MongoClient(uri, {
@@ -135,6 +136,7 @@ app.post('/update', (req, res) => {
 })
 
 
+// la richiesta load riceve le specifiche della query e delle options dalla richiesta e le immette in un array, considerando prima se i documenti non sono stati creati dall'utente che ha mandato la request, e allora se sono pubblici, privati o se l'utente che ha fatto la richiesta è incluso nella whitelist
 app.post('/load', (req,res) => {
   console.log('load')
   const client = new MongoClient(uri, {
@@ -176,7 +178,7 @@ run().catch(console.dir)
 })
 
 
-
+// Questo gestore ritorna al mittente il contenuto di un documento specificato dall'identificatore nel corpo della richiesta
 app.post('/singledoc', (req, res) => {
   console.log("get one");
   const client = new MongoClient(uri, {
@@ -204,7 +206,7 @@ app.post('/singledoc', (req, res) => {
 
 })
 
-
+// Simile al gestore di /singledoc questa funzione rileva un documento corrispondente e lo rimove dalla raccolta, rimuovendo anche eventuali eventi associati ad esso
 app.post('/delete', (req,res) => {
   console.log("delete");
   const client = new MongoClient(uri, {
