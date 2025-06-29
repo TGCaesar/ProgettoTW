@@ -13,8 +13,23 @@ var alternator = true
 var finished = true
 var started = false
 var notif
+const startButton = document.getElementById("start")
+const stopButton = document.getElementById("stop")
+const resumeButton = document.getElementById("resume")
+const skipButton = document.getElementById("skip")
+const nextButton = document.getElementById("next")
+const endButton = document.getElementById("end")
+const restartButton = document.getElementById("restart")
 
+startButton.addEventListener("click",start)
+stopButton.addEventListener("click",stop)
+resumeButton.addEventListener("click",resume)
+skipButton.addEventListener("click",skip)
+nextButton.addEventListener("click",next)
+endButton.addEventListener("click",end)
+restartButton.addEventListener("click",restart)
 
+// La funzione che avvia l'inizio del timer e abilita tutti gli altri pulsanti
 function start() {
     if (!started) {
         started = true
@@ -24,18 +39,27 @@ function start() {
         pause = document.getElementById("pausa").textContent
         next()
         resume()
+        startButton.setAttribute("hidden",true)
+        stopButton.removeAttribute("hidden")
+        skipButton.removeAttribute("hidden")
+        restartButton.removeAttribute("hidden")
     }
 }
 
+// una funzione che mette in pausa il timer e memorizza il momento in cui è stato messo in pausa per permettere di ripartire dopo
 function stop() {
     if (interval) {
         offset = waittime
         clearInterval(interval)
         interval = null
         dots.style.animationName = null
+        
     }
+    stopButton.setAttribute("hidden",true)
+    resumeButton.removeAttribute("hidden")
 }
 
+// funzione opposta di stop, fa ripartire il timer
 function resume() {
     if (!interval) {
         starttime = Date.now()
@@ -45,43 +69,22 @@ function resume() {
         } else {
             dots.style.animationName = "pause-anim"
         }
+        
     }
+    stopButton.removeAttribute("hidden")
+    resumeButton.setAttribute("hidden",true)
 }
 
+// una funzinone che azzera il timer e permette di passare al ciclo successivo
 function skip() {
     skipper = false
-    resume()
+    tick
+    skipButton.setAttribute("hidden",true)
 }
 
-// function tick() {
-//     let time = (Date.now() - starttime)
-//     console.log(time)
-//     time = Math.trunc(time / 1000)
-//     let seconds = time % 60
-//     seconds = String(seconds).padStart(2, '0')
-//     let minutes = Math.trunc(time / 60) % 60
-//     minutes = String(minutes).padStart(2, '0')
-//     clock.innerHTML = `${minutes}:${seconds}`
-// }
 
-// function tick() {
-//     waittime = (Date.now() - starttime) + offset
-//     let displaytime = Math.trunc(wait * 60 - (waittime / 1000))
-//     if (displaytime > 0 && skipper) {
-//         let seconds = displaytime % 60
-//         seconds = String(seconds).padStart(2, '0')
-//         let minutes = Math.trunc(displaytime / 60) % 60
-//         minutes = String(minutes).padStart(2, '0')
-//         clock.innerHTML = `${minutes}:${seconds}`
-//     } else {
-//         clock.innerHTML = `00:00`
-//         alert("done")
-//         clearInterval(interval)
-//         interval = null
-//         skipper = true
-//     }
-// }
-
+// la funzione principale che gestisce l'operazione del timer, normalmente viene eseguita attraverso setInterval e paragona Date.now con starttime, tenendo di conto l'offset che viene causato da pause precedenti
+// la funzione aggiorna il cronometro sulla pagina e se la pagina non è aperta manda una notifica quando si conclude il timer
 function tick() {
     waittime = (Date.now() - starttime) + offset
     let displaytime = Math.trunc(wait * 60 - (waittime / 1000))
@@ -93,12 +96,16 @@ function tick() {
         clock.innerHTML = `${minutes}:${seconds}`
     } else {
         clock.innerHTML = `00:00`
-        alert("done")
         clearInterval(interval)
         interval = null
         skipper = true
         finished = true
         dots.style.animationName = null
+        if (wait){
+        nextButton.removeAttribute("hidden")
+    }
+        stopButton.setAttribute("hidden",true)
+        resumeButton.setAttribute("hidden",true)
         var pausa = "della pausa"
         var studio = "dello studio"
         var notifmsg
@@ -114,6 +121,7 @@ function tick() {
     }
 }
 
+// Funzione che fa passare al ciclo successivo, ogni ciclo si alterna tra studio e pausa e questa funzione aggiorna la variabile wait a seconda del ciclo appena concluso
 function next() {
     if (started) {
         if (cycles > 0) {
@@ -137,14 +145,18 @@ function next() {
 
 
             document.getElementById("currentcycle").innerHTML = Math.trunc(cycles / 2) + 1
+            skipButton.removeAttribute("hidden")
         } else {
-            alert("cicli conclusi")
             document.getElementById("currentcycle").innerHTML = 0
             wait = null
+            endButton.removeAttribute("hidden")
         }
     }
+    nextButton.setAttribute("hidden",true)
+    
 }
 
+// funzione che permette di reinizializzare la pagina allo stato iniziale quando si conclude il ciclo finale, riabilita il pulsante di inizio e disabilita tutti gli altri
 function end() {
     if (started) {
         cycles = 0
@@ -155,7 +167,29 @@ function end() {
         started = false
         document.getElementById("currentcycle").innerHTML = "Press start"
         skip()
+        stopButton.setAttribute("hidden",true)
+        startButton.removeAttribute("hidden")
+        endButton.setAttribute("hidden",true)
+        nextButton.setAttribute("hidden",true)
+        resumeButton.setAttribute("hidden",true)
+        restartButton.setAttribute("hidden",true)
     }
+}
+
+// funzione che fa ritornare all'inizio del ciclo di studio
+function restart () {
+    var sum
+    if (alternator) {
+        sum = 2
+    } else {
+        sum = 1
+        alternator = true
+    }
+    cycles = cycles + sum
+    wait = 0
+    tick()
+    next()
+    endButton.setAttribute("hidden",true)
 }
 
 function closeNotif () {
